@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sage: #83896f;
+    --sage-deep: #6b7159;
+    --sage-light: #acaf9e;
+    --cream: #f5f1ea;
+    --cream-warm: #efe7d6;
+    --sand: #d9cfbe;
+    --terracotta: #b8704f;
+    --ink: #2c2c2a;
+    --ink-soft: #5c5c56;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--sage-light);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--sage-deep);
+  }
+
+  .container-editorial {
+    width: 100%;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-editorial {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  .hairline {
+    height: 1px;
+    background-color: var(--sand);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
