@@ -11,10 +11,10 @@ import { NAV_LINKS } from "./nav-links";
 import { useBookingSheet } from "@/components/booking/booking-context";
 
 interface NavProps {
-  tone?: "auto" | "light" | "dark";
+  tone?: "auto" | "solid";
 }
 
-export function Nav({ tone = "auto" }: NavProps) {
+export function Nav({ tone = "solid" }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const { openSheet } = useBookingSheet();
 
@@ -25,7 +25,7 @@ export function Nav({ tone = "auto" }: NavProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onLight = tone === "light" || (tone === "auto" && !scrolled);
+  const onPhotographic = tone === "auto" && !scrolled;
 
   return (
     <header
@@ -33,7 +33,9 @@ export function Nav({ tone = "auto" }: NavProps) {
         "fixed inset-x-0 top-0 z-40 transition-all duration-500 ease-editorial",
         scrolled
           ? "bg-cream/80 shadow-[0_1px_0_rgba(217,207,190,0.5)] backdrop-blur-md"
-          : "bg-transparent",
+          : tone === "auto"
+            ? "bg-transparent"
+            : "bg-cream/70 backdrop-blur-sm",
       )}
     >
       <Container className="flex h-16 items-center justify-between md:h-20">
@@ -42,7 +44,7 @@ export function Nav({ tone = "auto" }: NavProps) {
           className="rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
           aria-label="Serene Living, home"
         >
-          <Wordmark tone={onLight ? "cream" : "sage"} className="md:text-3xl" />
+          <Wordmark tone={onPhotographic ? "cream" : "sage"} className="md:text-3xl" />
         </Link>
 
         <nav className="hidden items-center gap-10 md:flex">
@@ -52,7 +54,7 @@ export function Nav({ tone = "auto" }: NavProps) {
               href={link.href}
               className={cn(
                 "text-sm font-light tracking-wide transition-colors",
-                onLight
+                onPhotographic
                   ? "text-cream/90 hover:text-cream"
                   : "text-ink hover:text-sage-deep",
               )}
@@ -68,7 +70,7 @@ export function Nav({ tone = "auto" }: NavProps) {
             onClick={() => openSheet()}
             className={cn(
               "hidden h-10 items-center rounded-sm px-5 text-xs font-light uppercase tracking-eyebrow transition-colors md:inline-flex",
-              onLight
+              onPhotographic
                 ? "border border-cream/70 text-cream hover:bg-cream hover:text-sage-deep"
                 : "bg-sage text-cream hover:bg-sage-deep",
             )}
